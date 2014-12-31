@@ -8,19 +8,28 @@
   <body>
     <div id="message"></div>
     <table>
+      <% board_size = 9 - 2 %>
       <tr>
         <td><img src="/images/up-left-side.svg" alt="up-left"></td>
+        <% board_size.times do %>
         <td><img src="/images/up-side.svg" alt="up"></td>
+        <% end %>
         <td><img src="/images/up-right-side.svg" alt="up-right"></td>
       </tr>
+      <% board_size.times do %>
       <tr>
         <td><img src="/images/left-side.svg" alt="left"></td>
+        <% board_size.times do %>
         <td><img src="/images/cross.svg" alt="cross"></td>
+        <% end %>
         <td><img src="/images/right-side.svg" alt="right"></td>
       </tr>
+      <% end %>
       <tr>
         <td><img src="/images/down-left-side.svg" alt="down-left"></td>
+        <% board_size.times do %>
         <td><img src="/images/down-side.svg" alt="down"></td>
+        <% end %>
         <td><img src="/images/down-right-side.svg" alt="down-right"></td>
       </tr>
     </table>
