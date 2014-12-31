@@ -28,6 +28,12 @@ function removeStone(a, h, p, t) {
   return src;
 }
 
+function _removeStone(id) {
+  var image = document.getElementById(id);
+  var src = image.getAttribute('src');
+  image.setAttribute('src', src.replace(/^(.*\/)([bw]-)(.*\.svg)$/, removeStone));
+}
+
 function addWhite(a, h, t) {
   var src = h + "w-" + t;
   return src;
@@ -46,7 +52,6 @@ function data2click(msg) {
   if (image !== null) {
     var src = image.getAttribute('src');
     if (src.indexOf('b-') !== -1 || src.indexOf('w-') !== -1) {
-      image.setAttribute('src', src.replace(/^(.*\/)([bw]-)(.*\.svg)$/, removeStone));
     } else {
       if (color === '0') {
         image.setAttribute('src', src.replace(/^(.*\/)(.*\.svg)$/, addBlack));

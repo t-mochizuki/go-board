@@ -31,19 +31,23 @@ EM.run do
 
     ws.onmessage do |msg|
       puts "Received Message: #{msg},#{@color}"
-      @clients.each do |socket|
-        socket.send "#{msg},#{@color}"
-      end
 
       if @images.include? msg
-        # puts "test: #{@images}"
-        @images.delete msg
-        # puts "test: #{@images}"
       else
+        @clients.each do |socket|
+          socket.send "#{msg},#{@color}"
+        end
+
         @images[msg] = @color.to_s
         @color += 1
         @color %= 2
       end
+    end
+
+    def deleteImage(msg)
+      puts "test: #{@images}"
+      @images.delete msg
+      puts "test: #{@images}"
     end
   end
 
