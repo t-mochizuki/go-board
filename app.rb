@@ -55,6 +55,13 @@ EM.run do
   App.run! :port => 3000
 
   Signal.trap(:INT) {
-    EM.stop
+    puts "How would you like to do?"
+    puts "Please enter something"
+    something = gets.chomp
+    if "s" == something then
+      EM.stop
+    else
+      puts 'If you want to stop the server, you enter "s"'
+    end
   }
 end
