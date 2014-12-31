@@ -27,10 +27,6 @@ EM.run do
     ws.onclose do
       ws.send "Closed."
       @clients.delete ws
-
-      if @clients.empty?
-        EM.stop
-      end
     end
 
     ws.onmessage do |msg|
@@ -53,4 +49,8 @@ EM.run do
 
   # ... [run Sinatra server]
   App.run! :port => 3000
+
+  Signal.trap(:INT) {
+    EM.stop
+  }
 end
