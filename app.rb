@@ -60,8 +60,11 @@ EM.run do
     something = gets.chomp
     if "s" == something then
       EM.stop
+    elsif "c" == something
+      @images.clear
     else
       puts 'If you want to stop the server, you enter "s"'
+      puts 'If you want to clear inner state, you enter "c"'
     end
   }
 end
