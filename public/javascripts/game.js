@@ -23,6 +23,60 @@ function connect() {
   }
 }
 
+var boardSize = 9;
+var arrayUp = new Array(boardSize);
+var arrayRight = new Array(boardSize);
+var arrayDown = new Array(boardSize);
+var arrayLeft = new Array(boardSize);
+
+var i = 0;
+for (i = 0; i < boardSize; ++i) {
+  arrayUp.push(i);
+}
+for (i = boardSize - 1; i < boardSize * boardSize; i += boardSize) {
+  arrayRight.push(i);
+}
+for (i = boardSize * (boardSize - 1); i < boardSize * boardSize; ++i) {
+  arrayDown.push(i);
+}
+for (i = 0; i < boardSize * (boardSize - 1) + 1; i += boardSize) {
+  arrayLeft.push(i);
+}
+
+function getId(mode, id) {
+  if (mode === 'up') {
+    if (arrayUp.indexOf(id) !== -1) {
+      return -1;
+    } else {
+      return id - boardSize;
+    }
+  }
+
+  if (mode === 'right') {
+    if (arrayRight.indexOf(id) !== -1) {
+      return -1;
+    } else {
+      return id + 1;
+    }
+  }
+
+  if (mode === 'down') {
+    if (arrayDown.indexOf(id) !== -1) {
+      return -1;
+    } else {
+      return id + boardSize;
+    }
+  }
+
+  if (mode === 'left') {
+    if (arrayLeft.indexOf(id) !== -1) {
+      return -1;
+    } else {
+      return id - 1
+    }
+  }
+}
+
 function removeStone(a, h, p, t) {
   var src = h + t;
   return src;
