@@ -23,6 +23,33 @@ function connect() {
   }
 }
 
+function testFindSameColor() {
+  assert(-1, findSameColor(0, 0));
+  _addStone(1, 0);
+  assert(1, findSameColor(0, 0));
+  _addStone(9, 0);
+  assert(1, findSameColor(0, 0));
+  _removeStone(1);
+  assert(9, findSameColor(0, 0));
+  _removeStone(9);
+
+  _addStone(1, 1);
+  assert(-1, findSameColor(0, 0));
+  _addStone(9, 0);
+  assert(9, findSameColor(0, 0));
+  _removeStone(9);
+  assert(-1, findSameColor(0, 0));
+  _removeStone(1);
+
+  _addStone(1, 0);
+  pushCheck(1);
+  assert(-1, findSameColor(0, 0));
+  assert(-1, findSameColor(2, 0));
+  assert(-1, findSameColor(11, 0));
+  clearCheckList();
+  _removeStone(1);
+}
+
 function findSameColor(id, color) {
   if (getState('up', id) === color) {
     return getId('up', id);
