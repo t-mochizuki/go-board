@@ -23,6 +23,22 @@ function connect() {
   }
 }
 
+function findSameColor(id, color) {
+  if (getState('up', id) === color) {
+    return getId('up', id);
+  }
+  if (getState('right', id) === color) {
+    return getId('right', id);
+  }
+  if (getState('down', id) === color) {
+    return getId('down', id);
+  }
+  if (getState('left', id) === color) {
+    return getId('left', id);
+  }
+  return -1;
+}
+
 function findBreathingPoint(id) {
   if (getState('up', id) === 2) {
     return id;
@@ -44,6 +60,10 @@ function getState(direction, id) {
 
   if (_id === -1) {
     return -1;
+  }
+
+  if (includeCheck(id) !== -1) {
+    return 3;
   }
 
   var image = document.getElementById(_id);
