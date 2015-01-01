@@ -23,8 +23,8 @@ function connect() {
   }
 }
 
-function getState(mode, id) {
-  var _id = getId(mode, id);
+function getState(direction, id) {
+  var _id = getId(direction, id);
 
   if (_id === -1) {
     return -1;
@@ -69,8 +69,8 @@ for (i = 0; i < boardSize * (boardSize - 1) + 1; i += boardSize) {
   arrayLeft.push(i);
 }
 
-function getId(mode, id) {
-  if (mode === 'up') {
+function getId(direction, id) {
+  if (direction === 'up') {
     if (arrayUp.indexOf(id) !== -1) {
       return -1;
     } else {
@@ -78,7 +78,7 @@ function getId(mode, id) {
     }
   }
 
-  if (mode === 'right') {
+  if (direction === 'right') {
     if (arrayRight.indexOf(id) !== -1) {
       return -1;
     } else {
@@ -86,7 +86,7 @@ function getId(mode, id) {
     }
   }
 
-  if (mode === 'down') {
+  if (direction === 'down') {
     if (arrayDown.indexOf(id) !== -1) {
       return -1;
     } else {
@@ -94,7 +94,7 @@ function getId(mode, id) {
     }
   }
 
-  if (mode === 'left') {
+  if (direction === 'left') {
     if (arrayLeft.indexOf(id) !== -1) {
       return -1;
     } else {
