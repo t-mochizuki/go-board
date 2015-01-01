@@ -65,6 +65,20 @@ function getState(direction, id) {
   return 2;
 }
 
+var checkList = [];
+
+function clearCheckList() {
+  checkList.length = 0;
+}
+
+function pushCheck(id) {
+  checkList.push(id);
+}
+
+function includeCheck(id) {
+  return checkList.indexOf(id);
+}
+
 var boardSize = 9;
 var arrayUp = new Array(boardSize);
 var arrayRight = new Array(boardSize);
