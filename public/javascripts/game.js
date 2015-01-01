@@ -235,11 +235,6 @@ function getId(direction, id) {
   return id;
 }
 
-function removeStone(a, h, p, t) {
-  var src = h + t;
-  return src;
-}
-
 function _removeStone(id) {
   var image = document.getElementById(id);
 
@@ -249,6 +244,11 @@ function _removeStone(id) {
 
   var src = image.getAttribute('src');
   image.setAttribute('src', src.replace(/^(.*\/)([bw]-)(.*\.svg)$/, removeStone));
+}
+
+function removeStone(a, h, p, t) {
+  var src = h + t;
+  return src;
 }
 
 function _addStone(id, color) {
