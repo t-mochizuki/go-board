@@ -84,6 +84,11 @@ function removeStone(a, h, p, t) {
 
 function _removeStone(id) {
   var image = document.getElementById(id);
+
+  if (image === null) {
+    return;
+  }
+
   var src = image.getAttribute('src');
   image.setAttribute('src', src.replace(/^(.*\/)([bw]-)(.*\.svg)$/, removeStone));
 }
