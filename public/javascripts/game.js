@@ -23,6 +23,22 @@ function connect() {
   }
 }
 
+function findBreathingPoint(id) {
+  if (getState('up', id) === 2) {
+    return id;
+  }
+  if (getState('right', id) === 2) {
+    return id;
+  }
+  if (getState('down', id) === 2) {
+    return id;
+  }
+  if (getState('left', id) === 2) {
+    return id;
+  }
+  return -1;
+}
+
 function getState(direction, id) {
   var _id = getId(direction, id);
 
