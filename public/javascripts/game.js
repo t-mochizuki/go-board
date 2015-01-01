@@ -23,6 +23,42 @@ function connect() {
   }
 }
 
+function testGetSameColorList() {
+  _addStone(1, 0);
+  _addStone(9, 0);
+
+  _addStone(2, 0);
+  _addStone(10, 0);
+  _addStone(18, 0);
+
+  _addStone(3, 1);
+  _addStone(11, 1);
+  _addStone(19, 1);
+  _addStone(27, 1);
+
+  assert(2, getSameColorList(0, 0).length);
+  assert(0, getSameColorList(8, 0).length);
+}
+
+function getSameColorList(id, color) {
+  var sameColorList = [];
+
+  if (getState('up', id) === color) {
+    sameColorList.push(getId('up', id));
+  }
+  if (getState('right', id) === color) {
+    sameColorList.push(getId('right', id));
+  }
+  if (getState('down', id) === color) {
+    sameColorList.push(getId('down', id));
+  }
+  if (getState('left', id) === color) {
+    sameColorList.push(getId('left', id));
+  }
+
+  return sameColorList;
+}
+
 function testFindSameColor() {
   assert(-1, findSameColor(0, 0));
   _addStone(1, 0);
