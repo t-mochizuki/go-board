@@ -74,6 +74,13 @@ function testFindBreathingPoint() {
   assert(-1, findBreathingPoint(0));
   _removeStone(1);
   _removeStone(9);
+
+  assert(0, findBreathingPoint(0));
+  pushCheck(1);
+  assert(0, findBreathingPoint(0));
+  pushCheck(9);
+  assert(-1, findBreathingPoint(0));
+  clearCheckList();
 }
 
 function findBreathingPoint(id) {
