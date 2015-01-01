@@ -23,6 +23,74 @@ function connect() {
   }
 }
 
+function testAlive() {
+  _addStone(1, 0);
+  _addStone(9, 0);
+
+  _addStone(2, 0);
+  _addStone(10, 0);
+  _addStone(18, 0);
+
+  _addStone(3, 1);
+  _addStone(11, 1);
+  _addStone(19, 1);
+  _addStone(27, 1);
+
+  clearCheckList();
+  clearResult();
+  alive(0, 0);
+
+  _removeStone(27);
+  clearCheckList();
+  clearResult();
+  alive(0, 0);
+}
+
+var result = [];
+
+function clearResult() {
+  result.length = 0;
+}
+
+function pushResult(value) {
+  result.push(value);
+}
+
+function includeBreathingPoint() {
+  return result.indexOf(0);
+}
+
+function alive(id, color) {
+  if (includeCheck(id) !== -1) {
+    return -1;
+  }
+
+  pushCheck(id);
+
+  if (findBreathingPoint(id) !== -1) {
+    return 0; // Here is a breathing point.
+  }
+
+  if (findSameColor(id, color) === -1) {
+    return -1; // Here in not a same color.
+  }
+
+  var sameColorList = getSameColorList(id, color); // Here is a same color.
+
+  var _id = 0;
+  sameColorList.forEach(function(_id){
+    if (alive(_id, color) === -1) {
+      console.log('' + _id + ': ' + result);
+      pushResult(-1);
+    } else {
+      console.log('' + _id + ': ' + result);
+      pushResult(0);
+    }
+  });
+
+  return includeBreathingPoint();
+}
+
 function testGetSameColorList() {
   _addStone(1, 0);
   _addStone(9, 0);
