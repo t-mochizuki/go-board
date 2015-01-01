@@ -119,6 +119,41 @@ for (i = 0; i < boardSize * (boardSize - 1) + 1; i += boardSize) {
   arrayLeft.push(i);
 }
 
+function testGetId() {
+  assert(-1, getId('up', 0));
+  assert(1, getId('right', 0));
+  assert(9, getId('down', 0));
+  assert(-1, getId('left', 0));
+
+  assert(-1, getId('up', 8));
+  assert(-1, getId('right', 8));
+  assert(17, getId('down', 8));
+  assert(7, getId('left', 8));
+
+  assert(63, getId('up', 72));
+  assert(73, getId('right', 72));
+  assert(-1, getId('down', 72));
+  assert(-1, getId('left', 72));
+
+  assert(71, getId('up', 80));
+  assert(-1, getId('right', 80));
+  assert(-1, getId('down', 80));
+  assert(79, getId('left', 80));
+
+  assert(22, getId('up', 31));
+  assert(32, getId('right', 31));
+  assert(40, getId('down', 31));
+  assert(30, getId('left', 31));
+}
+
+function assert(expectation, real) {
+  if (expectation === real) {
+    console.log('OK');
+  } else {
+    console.log('NG');
+  }
+}
+
 function getId(direction, id) {
   if (direction === 'up') {
     if (arrayUp.indexOf(id) !== -1) {
