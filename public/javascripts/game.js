@@ -23,6 +23,32 @@ function connect() {
   }
 }
 
+function getState(mode, id) {
+  var _id = getId(mode, id);
+
+  if (_id === -1) {
+    return -1;
+  }
+
+  var image = document.getElementById(_id);
+
+  if (image === null) {
+    return -1;
+  }
+
+  var src = image.getAttribute('src');
+
+  if (src.indexOf('b-') !== -1) {
+    return 0;
+  }
+
+  if (src.indexOf('w-') !== -1) {
+    return 1;
+  }
+
+  return 2;
+}
+
 var boardSize = 9;
 var arrayUp = new Array(boardSize);
 var arrayRight = new Array(boardSize);
@@ -75,6 +101,8 @@ function getId(mode, id) {
       return id - 1
     }
   }
+
+  return id;
 }
 
 function removeStone(a, h, p, t) {
