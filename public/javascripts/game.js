@@ -39,6 +39,16 @@ function findSameColor(id, color) {
   return -1;
 }
 
+function testFindBreathingPoint() {
+  assert(0, findBreathingPoint(0));
+  _addStone(1, 0);
+  assert(0, findBreathingPoint(0));
+  _addStone(9, 0);
+  assert(-1, findBreathingPoint(0));
+  _removeStone(1);
+  _removeStone(9);
+}
+
 function findBreathingPoint(id) {
   if (getState('up', id) === 2) {
     return id;
