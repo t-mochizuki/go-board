@@ -55,6 +55,51 @@ function findBreathingPoint(id) {
   return -1;
 }
 
+function testGetState() {
+  assert(-1, getState('up', 0));
+  assert(2, getState('right', 0));
+  assert(2, getState('down', 0));
+  assert(-1, getState('left', 0));
+
+  assert(-1, getState('up', 8));
+  assert(-1, getState('right', 8));
+  assert(2, getState('down', 8));
+  assert(2, getState('left', 8));
+
+  assert(2, getState('up', 72));
+  assert(2, getState('right', 72));
+  assert(-1, getState('down', 72));
+  assert(-1, getState('left', 72));
+
+  assert(2, getState('up', 80));
+  assert(-1, getState('right', 80));
+  assert(-1, getState('down', 80));
+  assert(2, getState('left', 80));
+
+  assert(2, getState('up', 32));
+  assert(2, getState('right', 32));
+  assert(2, getState('down', 32));
+  assert(2, getState('left', 32));
+
+  pushCheck(1);
+  assert(3, getState('right', 0));
+  pushCheck(9);
+  assert(3, getState('down', 0));
+  clearCheckList();
+
+  _addStone(1, 0);
+  assert(0, getState('right', 0));
+  assert(0, getState('left', 2));
+  assert(0, getState('up', 10));
+  _removeStone(1);
+
+  _addStone(9, 1);
+  assert(1, getState('down', 0));
+  assert(1, getState('left', 10));
+  assert(1, getState('up', 18));
+  _removeStone(9);
+}
+
 function getState(direction, id) {
   var _id = getId(direction, id);
 
@@ -62,7 +107,7 @@ function getState(direction, id) {
     return -1;
   }
 
-  if (includeCheck(id) !== -1) {
+  if (includeCheck(_id) !== -1) {
     return 3;
   }
 
@@ -204,6 +249,24 @@ function _removeStone(id) {
 
   var src = image.getAttribute('src');
   image.setAttribute('src', src.replace(/^(.*\/)([bw]-)(.*\.svg)$/, removeStone));
+}
+
+function _addStone(id, color) {
+  var image = document.getElementById(id);
+
+  if (image === null) {
+    return;
+  }
+
+  var src = image.getAttribute('src');
+
+  if (color === 0) {
+    callback = addBlack;
+  } else {
+    callback = addWhite;
+  }
+
+  image.setAttribute('src', src.replace(/^(.*\/)(.*\.svg)$/, callback));
 }
 
 function addWhite(a, h, t) {
