@@ -110,16 +110,6 @@ function testAlive() {
   alive(0, 0);
 }
 
-var resultList = [];
-
-function clearResult() {
-  resultList.length = 0;
-}
-
-function pushResult(value) {
-  resultList.push(value);
-}
-
 // Return value is 2, it means that the id is found in checkList variable.
 // In other words, it is already done processing.
 // Return value is 1, it means that the breathing point is found.
@@ -150,6 +140,16 @@ function alive(id, color) {
   console.log('[EXIT] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 
   return 0;
+}
+
+var resultList = [];
+
+function clearResult() {
+  resultList.length = 0;
+}
+
+function pushResult(value) {
+  resultList.push(value);
 }
 
 function testGetSameColorList() {
