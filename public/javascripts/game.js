@@ -23,6 +23,53 @@ function connect() {
   }
 }
 
+function testHold() {
+  _addStone(1, 0);
+  _addStone(9, 0);
+
+  _addStone(2, 0);
+  _addStone(10, 0);
+  _addStone(18, 0);
+
+  _addStone(3, 1);
+  _addStone(11, 1);
+  _addStone(19, 1);
+  _addStone(27, 1);
+
+  hold(0, 0);
+  hold(0, 1);
+  clearCheckList();
+  clearResult();
+
+  _removeStone(27);
+  hold(0, 0);
+  hold(0, 1);
+}
+
+function hold(id, color) {
+  console.log('[ENTRY] hold: id=' + id + ' ' + 'color=' + color);
+  var _color = getDiffColor(color);
+  var diffColorList = getSameColorList(id, _color);
+  var _id = -1;
+  diffColorList.forEach(function(_id){
+    clearCheckList();
+    clearResult();
+    pushCheck(id);
+    if (alive(_id, _color) === -1) {
+      pushResult(-1);
+      console.log('hold: _id=' + _id + ' ' + 'result=' + result);
+    } else {
+      pushResult(0);
+      console.log('hold: _id=' + _id + ' ' + 'result=' + result);
+    }
+    shiftCheck();
+  });
+}
+
+function shiftCheck() {
+  checkList.shift();
+}
+
 function testGetDiffColor() {
   assert(1, getDiffColor(0));
   assert(0, getDiffColor(1));
@@ -99,14 +146,14 @@ function alive(id, color) {
 
   var sameColorList = getSameColorList(id, color); // Here is a same color.
 
-  var _id = 0;
+  var _id = -1;
   sameColorList.forEach(function(_id){
     if (alive(_id, color) === -1) {
-      console.log('' + _id + ': ' + result);
       pushResult(-1);
+      console.log('alive: _id=' + _id + ' ' + 'result=' + result);
     } else {
-      console.log('' + _id + ': ' + result);
       pushResult(0);
+      console.log('alive: _id=' + _id + ' ' + 'result=' + result);
     }
   });
 
