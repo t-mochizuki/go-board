@@ -132,7 +132,7 @@ function includeBreathingPoint() {
 function alive(id, color) {
   console.log('[ENTRY] alive: id=' + id + ' ' + 'color=' + color);
 
-  if (includeCheck(id) !== -1) {
+  if (findCheck(id) !== -1) {
     return -1;
   }
 
@@ -282,7 +282,7 @@ function getState(direction, id) {
     return -1;
   }
 
-  if (includeCheck(_id) !== -1) {
+  if (findCheck(_id) !== -1) {
     return 3;
   }
 
@@ -315,7 +315,7 @@ function pushCheck(id) {
   checkList.push(id);
 }
 
-function includeCheck(id) {
+function findCheck(id) {
   return checkList.indexOf(id);
 }
 
