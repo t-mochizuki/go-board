@@ -57,10 +57,10 @@ function hold(id, color) {
     pushCheck(id);
     if (alive(_id, _color) === -1) {
       pushResult(-1);
-      console.log('hold: _id=' + _id + ' ' + 'result=' + result);
+      console.log('hold: _id=' + _id + ' ' + 'resultList=' + resultList);
     } else {
       pushResult(0);
-      console.log('hold: _id=' + _id + ' ' + 'result=' + result);
+      console.log('hold: _id=' + _id + ' ' + 'resultList=' + resultList);
     }
     shiftCheck();
   });
@@ -115,18 +115,18 @@ function testAlive() {
   alive(0, 0);
 }
 
-var result = [];
+var resultList = [];
 
 function clearResult() {
-  result.length = 0;
+  resultList.length = 0;
 }
 
 function pushResult(value) {
-  result.push(value);
+  resultList.push(value);
 }
 
 function includeBreathingPoint() {
-  return result.indexOf(0);
+  return resultList.indexOf(0);
 }
 
 function alive(id, color) {
@@ -148,14 +148,10 @@ function alive(id, color) {
   }
 
   var _id = -1;
+  var result = -1;
   sameColorList.forEach(function(_id){
-    if (alive(_id, color) === -1) {
-      pushResult(-1);
-      console.log('alive: _id=' + _id + ' ' + 'result=' + result);
-    } else {
-      pushResult(0);
-      console.log('alive: _id=' + _id + ' ' + 'result=' + result);
-    }
+    result = alive(_id, color);
+    pushResult(result);
   });
 
   console.log('[EXIT] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
