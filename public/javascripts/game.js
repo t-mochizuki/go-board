@@ -130,7 +130,7 @@ function includeBreathingPoint() {
 }
 
 function alive(id, color) {
-  console.log('[ENTRY] alive: id=' + id + ' ' + 'color=' + color);
+  console.log('[ENTRY] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 
   if (findCheck(id) !== -1) {
     return -1;
@@ -157,6 +157,8 @@ function alive(id, color) {
       console.log('alive: _id=' + _id + ' ' + 'result=' + result);
     }
   });
+
+  console.log('[EXIT] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 
   return includeBreathingPoint();
 }
