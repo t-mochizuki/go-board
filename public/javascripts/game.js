@@ -47,23 +47,18 @@ function testHold() {
 }
 
 function hold(id, color) {
-  console.log('[ENTRY] hold: id=' + id + ' ' + 'color=' + color);
+  console.log('[ENTRY] hold: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
+  var _id = -1;
   var _color = getDiffColor(color);
   var diffColorList = getSameColorList(id, _color);
-  var _id = -1;
   diffColorList.forEach(function(_id){
     clearCheck();
     clearResult();
     pushCheck(id);
-    if (alive(_id, _color) === -1) {
-      pushResult(-1);
-      console.log('hold: _id=' + _id + ' ' + 'resultList=' + resultList);
-    } else {
-      pushResult(0);
-      console.log('hold: _id=' + _id + ' ' + 'resultList=' + resultList);
-    }
+    pushResult(alive(_id, _color));
     shiftCheck();
   });
+  console.log('[EXIT] hold: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 }
 
 function shiftCheck() {
@@ -148,10 +143,8 @@ function alive(id, color) {
   }
 
   var _id = -1;
-  var result = -1;
   sameColorList.forEach(function(_id){
-    result = alive(_id, color);
-    pushResult(result);
+    pushResult(alive(_id, color));
   });
 
   console.log('[EXIT] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
