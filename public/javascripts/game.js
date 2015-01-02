@@ -130,6 +130,8 @@ function includeBreathingPoint() {
 }
 
 function alive(id, color) {
+  console.log('[ENTRY] alive: id=' + id + ' ' + 'color=' + color);
+
   if (includeCheck(id) !== -1) {
     return -1;
   }
@@ -140,11 +142,10 @@ function alive(id, color) {
     return 0; // Here is a breathing point.
   }
 
-  if (findSameColor(id, color) === -1) {
-    return -1; // Here in not a same color.
+  var sameColorList = getSameColorList(id, color);
+  if (sameColorList.length === 0) {
+    return -1;
   }
-
-  var sameColorList = getSameColorList(id, color); // Here is a same color.
 
   var _id = -1;
   sameColorList.forEach(function(_id){
@@ -194,49 +195,6 @@ function getSameColorList(id, color) {
   }
 
   return sameColorList;
-}
-
-function testFindSameColor() {
-  assert(-1, findSameColor(0, 0));
-  _addStone(1, 0);
-  assert(1, findSameColor(0, 0));
-  _addStone(9, 0);
-  assert(1, findSameColor(0, 0));
-  _removeStone(1);
-  assert(9, findSameColor(0, 0));
-  _removeStone(9);
-
-  _addStone(1, 1);
-  assert(-1, findSameColor(0, 0));
-  _addStone(9, 0);
-  assert(9, findSameColor(0, 0));
-  _removeStone(9);
-  assert(-1, findSameColor(0, 0));
-  _removeStone(1);
-
-  _addStone(1, 0);
-  pushCheck(1);
-  assert(-1, findSameColor(0, 0));
-  assert(-1, findSameColor(2, 0));
-  assert(-1, findSameColor(11, 0));
-  clearCheckList();
-  _removeStone(1);
-}
-
-function findSameColor(id, color) {
-  if (getState('up', id) === color) {
-    return getId('up', id);
-  }
-  if (getState('right', id) === color) {
-    return getId('right', id);
-  }
-  if (getState('down', id) === color) {
-    return getId('down', id);
-  }
-  if (getState('left', id) === color) {
-    return getId('left', id);
-  }
-  return -1;
 }
 
 function testFindBreathingPoint() {
