@@ -406,6 +406,11 @@ function testGetId() {
   assert(32, getId('right', 31));
   assert(40, getId('down', 31));
   assert(30, getId('left', 31));
+
+  assert(22, getId('', 22));
+  assert(32, getId('', 32));
+  assert(40, getId('', 40));
+  assert(30, getId('', 30));
 }
 
 function assert(expectation, real) {
