@@ -23,7 +23,29 @@ function connect() {
   }
 }
 
+function testGetDiffColor() {
+  assert(1, getDiffColor(0));
+  assert(0, getDiffColor(1));
+  assert(-1, getDiffColor(2));
+}
+
+function getDiffColor(color) {
+  if (color === 0) {
+    return 1;
+  } else if (color === 1) {
+    return 0;
+  } else {
+    return -1;
+  }
+}
+
 function testAlive() {
+  _addStone(9, 0);
+  clearCheckList();
+  clearResult();
+  alive(0, 1);
+  _removeStone(9);
+
   _addStone(1, 0);
   _addStone(9, 0);
 
