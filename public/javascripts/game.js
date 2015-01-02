@@ -38,8 +38,13 @@ function testHold() {
 
   hold(0, 0);
   hold(0, 1);
-  clearCheck();
-  clearResult();
+
+  _addStone(1, 0);
+  _addStone(9, 0);
+
+  _addStone(2, 0);
+  _addStone(10, 0);
+  _addStone(18, 0);
 
   _removeStone(27);
   hold(0, 0);
@@ -57,7 +62,12 @@ function hold(id, color) {
     pushCheck(id);
     pushResult(alive(_id, _color));
     shiftCheck();
+    if (resultList.indexOf(1) === -1) {
+      checkList.forEach(_removeStone);
+    }
   });
+  clearCheck();
+  clearResult();
   console.log('[EXIT] hold: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 }
 
