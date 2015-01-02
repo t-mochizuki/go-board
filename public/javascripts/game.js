@@ -56,18 +56,17 @@ function hold(id, color) {
   var _id = -1;
   var _color = getDiffColor(color);
   var diffColorList = getSameColorList(id, _color);
+  clearCheck();
   diffColorList.forEach(function(_id){
-    clearCheck();
-    clearResult();
     pushCheck(id);
     pushResult(alive(_id, _color));
     shiftCheck();
     if (resultList.indexOf(1) === -1) {
       checkList.forEach(_removeStone);
     }
+    clearCheck();
+    clearResult();
   });
-  clearCheck();
-  clearResult();
   console.log('[EXIT] hold: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 }
 
