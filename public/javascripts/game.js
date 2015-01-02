@@ -452,13 +452,13 @@ function addBlack(a, h, t) {
 function data2click(msg) {
   msg = msg.split(',');
   var id = msg[0];
-  var color = msg[1];
+  var color = Number(msg[1]);
   var image = document.getElementById(id);
   if (image !== null) {
     var src = image.getAttribute('src');
     if (src.indexOf('b-') !== -1 || src.indexOf('w-') !== -1) {
     } else {
-      if (color === '0') {
+      if (color === 0) {
         image.setAttribute('src', src.replace(/^(.*\/)(.*\.svg)$/, addBlack));
       } else {
         image.setAttribute('src', src.replace(/^(.*\/)(.*\.svg)$/, addWhite));
