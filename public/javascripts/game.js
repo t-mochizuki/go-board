@@ -38,7 +38,7 @@ function testHold() {
 
   hold(0, 0);
   hold(0, 1);
-  clearCheckList();
+  clearCheck();
   clearResult();
 
   _removeStone(27);
@@ -52,7 +52,7 @@ function hold(id, color) {
   var diffColorList = getSameColorList(id, _color);
   var _id = -1;
   diffColorList.forEach(function(_id){
-    clearCheckList();
+    clearCheck();
     clearResult();
     pushCheck(id);
     if (alive(_id, _color) === -1) {
@@ -88,7 +88,7 @@ function getDiffColor(color) {
 
 function testAlive() {
   _addStone(9, 0);
-  clearCheckList();
+  clearCheck();
   clearResult();
   alive(0, 1);
   _removeStone(9);
@@ -105,12 +105,12 @@ function testAlive() {
   _addStone(19, 1);
   _addStone(27, 1);
 
-  clearCheckList();
+  clearCheck();
   clearResult();
   alive(0, 0);
 
   _removeStone(27);
-  clearCheckList();
+  clearCheck();
   clearResult();
   alive(0, 0);
 }
@@ -211,7 +211,7 @@ function testFindBreathingPoint() {
   assert(0, findBreathingPoint(0));
   pushCheck(9);
   assert(-1, findBreathingPoint(0));
-  clearCheckList();
+  clearCheck();
 }
 
 function findBreathingPoint(id) {
@@ -260,7 +260,7 @@ function testGetState() {
   assert(3, getState('right', 0));
   pushCheck(9);
   assert(3, getState('down', 0));
-  clearCheckList();
+  clearCheck();
 
   _addStone(1, 0);
   assert(0, getState('right', 0));
@@ -307,7 +307,7 @@ function getState(direction, id) {
 
 var checkList = [];
 
-function clearCheckList() {
+function clearCheck() {
   checkList.length = 0;
 }
 
