@@ -125,26 +125,26 @@ function pushResult(value) {
   resultList.push(value);
 }
 
-function includeBreathingPoint() {
-  return resultList.indexOf(0);
-}
-
+// Return value is 2, it means that the id is found in checkList variable.
+// In other words, it is already done processing.
+// Return value is 1, it means that the breathing point is found.
+// Return value is 0, it means that a breathing point is not found.
 function alive(id, color) {
   console.log('[ENTRY] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 
   if (findCheck(id) !== -1) {
-    return -1;
+    return 2;
   }
 
   pushCheck(id);
 
   if (findBreathingPoint(id) !== -1) {
-    return 0; // Here is a breathing point.
+    return 1; // Here is a breathing point.
   }
 
   var sameColorList = getSameColorList(id, color);
   if (sameColorList.length === 0) {
-    return -1;
+    return 0;
   }
 
   var _id = -1;
@@ -156,7 +156,7 @@ function alive(id, color) {
 
   console.log('[EXIT] alive: id=' + id + ' ' + 'color=' + color + ' ' + 'checkList=' + checkList.join() + ' ' + 'resultList=' + resultList.join());
 
-  return includeBreathingPoint();
+  return 0;
 }
 
 function testGetSameColorList() {
