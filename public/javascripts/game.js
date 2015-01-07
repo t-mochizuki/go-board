@@ -23,6 +23,131 @@ function connect() {
   }
 }
 
+function testHold7() {
+  _addStone(getId('up', 42), 0);
+  _addStone(getId('right', 42), 0);
+  _addStone(getId('right', getId('right', 51)), 0);
+  _addStone(getId('right', 60), 0);
+  _addStone(getId('down', 60), 0);
+  _addStone(getId('left', 42), 0);
+  _addStone(getId('left', getId('left', 51)), 0);
+  _addStone(getId('left', 60), 0);
+  _addStone(getId('', 51), 0);
+  _addStone(getId('', 42), 1);
+  _addStone(getId('', getId('right', 51)), 1);
+  _addStone(getId('', getId('left', 51)), 1);
+  _addStone(getId('', 60), 1);
+  hold(getId('', 51), 0);
+}
+
+function testHold6() {
+  _addStone(getId('up', 36), 0);
+  _addStone(getId('right', 36), 0);
+  _addStone(getId('right', getId('right', 45)), 0);
+  _addStone(getId('right', 54), 0);
+  _addStone(getId('down', 54), 0);
+  _addStone(getId('left', 36), 0);
+  _addStone(getId('left', getId('left', 45)), 0);
+  _addStone(getId('left', 54), 0);
+  _addStone(getId('', 45), 0);
+  _addStone(getId('', 36), 1);
+  _addStone(getId('', getId('right', 45)), 1);
+  _addStone(getId('', 54), 1);
+  hold(getId('', 45), 0);
+}
+
+function testHold5() {
+  _addStone(getId('up', 31), 0);
+  _addStone(getId('right', 31), 0);
+  _addStone(getId('right', 40), 0);
+  _addStone(getId('down', 40), 0);
+  _addStone(getId('left', 40), 0);
+  _addStone(getId('left', 31), 0);
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('up', 31), 0);
+
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('right', 40), 0);
+
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('right', 31), 0);
+
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('down', 40), 0);
+
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('left', 40), 0);
+
+  _addStone(getId('', 31), 1);
+  _addStone(getId('', 40), 1);
+  hold(getId('left', 31), 0);
+}
+
+function testHold4() {
+  _addStone(getId('up', 27), 0);
+  _addStone(getId('right', 27), 0);
+  _addStone(getId('right', 36), 0);
+  _addStone(getId('down', 36), 0);
+  _addStone(getId('left', 36), 0);
+  _addStone(getId('left', 27), 0);
+  _addStone(getId('', 27), 1);
+  _addStone(getId('', 36), 1);
+  hold(getId('up', 27), 0);
+
+  _addStone(getId('', 27), 1);
+  _addStone(getId('', 36), 1);
+  hold(getId('right', 27), 0);
+
+  _addStone(getId('', 27), 1);
+  _addStone(getId('', 36), 1);
+  hold(getId('right', 36), 0);
+
+  _addStone(getId('', 27), 1);
+  _addStone(getId('', 36), 1);
+  hold(getId('down', 36), 0);
+}
+
+function testHold3() {
+  _addStone(getId('up', 15), 0);
+  _addStone(getId('right', 15), 0);
+  _addStone(getId('down', 15), 0);
+  _addStone(getId('left', 15), 0);
+  _addStone(getId('', 15), 1);
+  hold(getId('up', 15), 0);
+
+  _addStone(getId('', 15), 1);
+  hold(getId('right', 15), 0);
+
+  _addStone(getId('', 15), 1);
+  hold(getId('down', 15), 0);
+
+  _addStone(getId('', 15), 1);
+  hold(getId('left', 15), 0);
+}
+
+function testHold2() {
+  _addStone(getId('up', 5), 0);
+  _addStone(getId('right', 5), 0);
+  _addStone(getId('down', 5), 0);
+  _addStone(getId('left', 5), 0);
+  // _addStone(getId('', 5), 1);
+  // hold(getId('up', 5), 0);
+
+  _addStone(getId('', 5), 1);
+  hold(getId('right', 5), 0);
+
+  _addStone(getId('', 5), 1);
+  hold(getId('down', 5), 0);
+
+  _addStone(getId('', 5), 1);
+  hold(getId('left', 5), 0);
+}
+
 function testHold() {
   _addStone(1, 0);
   _addStone(9, 0);
