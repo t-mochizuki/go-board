@@ -1,6 +1,6 @@
-This is board game.
+This is a board game.
 
-If you interest in this game, you execute a following command.
+If you are interested in this game, execute the following commands.
 
 ``` sh
 $ gem install bundler
@@ -14,4 +14,4 @@ Please try to access the following url.
 http://localhost:3000/
 ```
 
-I think that it probably can enjoy the game.
+Have fun, I think you can enjoy the game.
