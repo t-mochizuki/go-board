@@ -5,6 +5,21 @@ window.addEventListener("load", () => {
     tile.dataset.color = "BLACK"
   });
 
+  // The following makes a problem easy.
+  const stones = [];
+  const boardSize = 5;
+  for (let i = 0; i < boardSize; ++i) stones.push(Array(boardSize).fill(-1));
+  for (let row = 0; row < boardSize; ++row) {
+    for (let column = 0; column < boardSize; ++column) {
+      const tile = document.querySelector(`table.board tr > td[data-row="${row}"][data-column="${column}"]`);
+
+      if (tile.dataset.color === undefined) continue;
+
+      if (tile.dataset.color === "BLACK") stones[row][column] = 0;
+      if (tile.dataset.color === "WHITE") stones[row][column] = 1;
+    }
+  }
+
   // TODO: implement a checker
 
   let counter = 1;
