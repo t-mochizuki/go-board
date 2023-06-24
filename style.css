@@ -9,14 +9,6 @@
   width: 80px;
 }
 
-.board .top-left {
-  background-color: darkkhaki;
-}
-
-.board .bottom {
-  background-color: beige;
-}
-
 .board tr > td:hover {
   background-color: magenta;
   opacity: .15;
@@ -35,12 +27,5 @@
       background-color: magenta;
       opacity: .15;
     }
-  }
-
-  & .top-left {
-    background-color: darkkhaki;
-  }
-  & .bottom {
-    background-color: beige;
   }
 }
