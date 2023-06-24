@@ -1,0 +1,17 @@
+.board {
+  background-color: palegoldenrod;
+
+  & tr > td {
+    background-color: palegoldenrod;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+  }
+
+  & .top-left {
+    background-color: darkkhaki;
+  }
+  & .bottom {
+    background-color: beige;
+  }
+}
