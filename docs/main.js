@@ -4,11 +4,11 @@ window.addEventListener("load", () => {
     const occupied = [];
     const boardSize = 5;
     for (let i = 0; i < boardSize; ++i) occupied.push(Array(boardSize).fill(false));
-    const board = document.querySelector(".board");
+    const board = document.querySelector("table.board");
     let counter = 0;
 
     board.addEventListener("click", () => {
-      const tile = document.querySelector(".board tr > td:hover");
+      const tile = document.querySelector("table.board tr > td:hover");
 
       if (tile === null) return;
 
