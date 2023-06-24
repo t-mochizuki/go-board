@@ -9,9 +9,9 @@ window.addEventListener("load", () => {
 
       if (tile === null) return;
 
-      kifu.push({ row: tile.dataset.row, column: tile.dataset.column, color: counter % 2 });
+      kifu.push({ row: tile.dataset.row, column: tile.dataset.column, color: counter % 2 === 1 ? 'WHITE' : 'BLACK' });
 
-      tile.style.backgroundColor = counter % 2 === 0 ? "beige" : "darkkhaki";
+      tile.style.backgroundColor = counter % 2 === 1 ? "beige" : "darkkhaki";
       counter++;
     });
   })();
