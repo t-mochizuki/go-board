@@ -2,7 +2,8 @@ window.addEventListener("load", () => {
   (() => {
     const kifu = [];
     const occupied = [];
-    for (let i = 0; i < 5; ++i) occupied.push(Array(5).fill(false));
+    const boardSize = 5;
+    for (let i = 0; i < boardSize; ++i) occupied.push(Array(boardSize).fill(false));
     const board = document.querySelector(".board");
     let counter = 0;
 
