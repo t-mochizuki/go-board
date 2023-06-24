@@ -14,6 +14,14 @@ table.board tr > td:hover {
   opacity: .15;
 }
 
+table.board tr > td[data-color="BLACK"] {
+  background-color: darkkhaki;
+}
+
+table.board tr > td[data-color="WHITE"] {
+  background-color: beige;
+}
+
 table.board {
   background-color: palegoldenrod;
 
@@ -26,6 +34,14 @@ table.board {
     &:hover {
       background-color: magenta;
       opacity: .15;
+    }
+
+    &[data-color="BLACK"] {
+      background-color: darkkhaki;
+    }
+
+    &[data-color="WHITE"] {
+      background-color: beige;
     }
   }
 }
