@@ -2,7 +2,7 @@
   background-color: palegoldenrod;
 }
 
-.board tr td {
+.board tr > td {
   background-color: palegoldenrod;
   border-radius: 50%;
   height: 80px;
