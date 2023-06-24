@@ -1,20 +1,20 @@
-.board {
+table.board {
   background-color: palegoldenrod;
 }
 
-.board tr > td {
+table.board tr > td {
   background-color: palegoldenrod;
   border-radius: 50%;
   height: 80px;
   width: 80px;
 }
 
-.board tr > td:hover {
+table.board tr > td:hover {
   background-color: magenta;
   opacity: .15;
 }
 
-.board {
+table.board {
   background-color: palegoldenrod;
 
   & tr > td {
