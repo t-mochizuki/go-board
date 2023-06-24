@@ -17,6 +17,11 @@
   background-color: beige;
 }
 
+.board tr > td:hover {
+  background-color: magenta;
+  opacity: .15;
+}
+
 .board {
   background-color: palegoldenrod;
 
@@ -25,6 +30,11 @@
     border-radius: 50%;
     height: 80px;
     width: 80px;
+
+    &:hover {
+      background-color: magenta;
+      opacity: .15;
+    }
   }
 
   & .top-left {
