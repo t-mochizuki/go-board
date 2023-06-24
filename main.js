@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
   (() => {
+    let kifu = null;
     const board = document.querySelector(".board");
     let counter = 0;
 
