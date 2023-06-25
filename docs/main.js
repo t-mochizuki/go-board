@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
     for (let i = 0; i < boardSize; ++i) stones.push(Array(boardSize).fill(-1));
     for (let row = 0; row < boardSize; ++row) {
       for (let column = 0; column < boardSize; ++column) {
-        const tile = document.querySelector(`table.board tr > td[data-row="${row}"][data-column="${column}"]`);
+        const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
 
         if (tile.dataset.color === undefined) continue;
 
