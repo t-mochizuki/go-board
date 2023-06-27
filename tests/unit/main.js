@@ -1,3 +1,4 @@
+const boardSize = 5;
 function isRemoval(stones, visited, color, row, column) {
   if (row < 0 || boardSize <= row) return true;
   if (column < 0 || boardSize <= column) return true;
