@@ -28,7 +28,11 @@ window.addEventListener("load", () => {
 
     if (tile === null) return;
 
-    if (tile.dataset.color !== undefined) return;
+    if (tile.dataset.color !== undefined) {
+      // TODO: I want to remove the captured stones automatically.
+      delete tile.dataset.color;
+      return;
+    }
 
     tile.dataset.color = color();
 
