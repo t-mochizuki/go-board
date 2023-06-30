@@ -21,27 +21,21 @@
   stones[3][0] = 0;
 
   {
-    const visited = [];
-    for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
     const checker = new Checker();
-    console.assert(checker.isRemoval(stones, visited, stones[0][0], 0, 0), "The white stone should be removed.");
-    console.table(visited);
+    console.assert(checker.isRemoval(stones, stones[0][0], 0, 0), "The white stone should be removed.");
+    console.table(checker.visited);
   }
   {
-    const visited = [];
-    for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
     const checker = new Checker();
-    console.assert(checker.isRemoval(stones, visited, stones[2][1], 2, 1) === false, "The black stone shouldn't be removed.");
-    console.table(visited);
+    console.assert(checker.isRemoval(stones, stones[2][1], 2, 1) === false, "The black stone shouldn't be removed.");
+    console.table(checker.visited);
   }
 
   stones[2][1] = 1;
 
   {
-    const visited = [];
-    for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
     const checker = new Checker();
-    console.assert(checker.isRemoval(stones, visited, stones[0][0], 0, 0) === false, "The white stone shouldn't be removed.");
-    console.table(visited);
+    console.assert(checker.isRemoval(stones, stones[0][0], 0, 0) === false, "The white stone shouldn't be removed.");
+    console.table(checker.visited);
   }
 }
