@@ -24,11 +24,13 @@
     const checker = new Checker();
     console.assert(checker.isRemoval(stones, stones[0][0], 0, 0), "The white stone should be removed.");
     console.table(checker.visited);
+    console.debug(checker.path);
   }
   {
     const checker = new Checker();
     console.assert(checker.isRemoval(stones, stones[2][1], 2, 1) === false, "The black stone shouldn't be removed.");
     console.table(checker.visited);
+    console.debug(checker.path);
   }
 
   stones[2][1] = 1;
@@ -37,5 +39,6 @@
     const checker = new Checker();
     console.assert(checker.isRemoval(stones, stones[0][0], 0, 0) === false, "The white stone shouldn't be removed.");
     console.table(checker.visited);
+    console.debug(checker.path);
   }
 }
