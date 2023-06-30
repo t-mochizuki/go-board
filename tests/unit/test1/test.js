@@ -11,17 +11,17 @@
   stones[0][1] = 0;
 
   {
-    const checker = new Checker();
+    const checker = new Checker(boardSize);
     console.assert(checker.isRemoval(stones, stones[0][0], 0, 0), "The white stone should be removed.");
     console.table(checker.visited);
   }
   {
-    const checker = new Checker();
+    const checker = new Checker(boardSize);
     console.assert(checker.isRemoval(stones, stones[1][0], 1, 0) === false, "The black stone shouldn't be removed.");
     console.table(checker.visited);
   }
   {
-    const checker = new Checker();
+    const checker = new Checker(boardSize);
     console.assert(checker.isRemoval(stones, stones[0][1], 0, 1) === false, "The other black stone shouldn't be also not removed.");
     console.table(checker.visited);
   }

@@ -1,6 +1,6 @@
 class Checker {
-  constructor() {
-    this.boardSize = 5;
+  constructor(boardSize) {
+    this.boardSize = boardSize;
     this.path = [];
     this.visited = [];
     for (let i = 0; i < this.boardSize; ++i) this.visited.push(Array(this.boardSize).fill(false));
