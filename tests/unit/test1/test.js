@@ -13,19 +13,22 @@
   {
     const visited = [];
     for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
-    console.assert(isRemoval(stones, visited, stones[0][0], 0, 0), "The white stone should be removed.");
+    const checker = new Checker();
+    console.assert(checker.isRemoval(stones, visited, stones[0][0], 0, 0), "The white stone should be removed.");
     console.table(visited);
   }
   {
     const visited = [];
     for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
-    console.assert(isRemoval(stones, visited, stones[1][0], 1, 0) === false, "The black stone shouldn't be removed.");
+    const checker = new Checker();
+    console.assert(checker.isRemoval(stones, visited, stones[1][0], 1, 0) === false, "The black stone shouldn't be removed.");
     console.table(visited);
   }
   {
     const visited = [];
     for (let i = 0; i < boardSize; ++i) visited.push(Array(boardSize).fill(false));
-    console.assert(isRemoval(stones, visited, stones[0][1], 0, 1) === false, "The other black stone shouldn't be also not removed.");
+    const checker = new Checker();
+    console.assert(checker.isRemoval(stones, visited, stones[0][1], 0, 1) === false, "The other black stone shouldn't be also not removed.");
     console.table(visited);
   }
 }
