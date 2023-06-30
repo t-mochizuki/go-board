@@ -10,7 +10,8 @@ table.board tr > td {
 }
 
 table.board tr > td:hover {
-  opacity: .50;
+  background-color: magenta;
+  opacity: .15;
 }
 
 table.board tr > td[data-color="BLACK"] {
@@ -31,7 +32,8 @@ table.board {
     width: 80px;
 
     &:hover {
-      opacity: .50;
+      background-color: magenta;
+      opacity: .15;
     }
 
     &[data-color="BLACK"] {
