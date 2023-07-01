@@ -6,7 +6,7 @@
       for (let i = 0; i < this.boardSize; ++i) this.stones.push(Array(this.boardSize).fill(-1));
     }
 
-    setStones() {
+    reset() {
       for (let row = 0; row < this.boardSize; ++row) {
         for (let column = 0; column < this.boardSize; ++column) {
           const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
@@ -74,7 +74,7 @@
       if (tile.dataset.color !== undefined) return;
 
       const b = new Board(boardSize);
-      b.setStones();
+      b.reset();
       const row = parseInt(tile.dataset.row);
       const column = parseInt(tile.dataset.column);
       b.setStone(counter % 2, row, column);
