@@ -37,7 +37,7 @@ class Checker {
     this.path.push({ row: row, column: column });
     this.visited[row][column] = true;
 
-    return [[-1, 0], [0, 1], [1, 0], [-1, 0]].map(([dy, dx]) => this.isRemoval(stones, color, row + dy, column + dx)).every(x => x);
+    return [[-1, 0], [0, 1], [1, 0], [0, -1]].map(([dy, dx]) => this.isRemoval(stones, color, row + dy, column + dx)).every(x => x);
   }
 
   remove(stones) {
