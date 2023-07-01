@@ -18,6 +18,10 @@
         }
       }
     }
+
+    setStone(color, row, column) {
+      this.stones[row][column] = color;
+    }
   }
 
   class Checker {
@@ -69,15 +73,17 @@
 
       if (tile.dataset.color !== undefined) return;
 
-      tile.dataset.color = color();
-
       const b = new Board(boardSize);
       b.setStones();
+      const row = parseInt(tile.dataset.row);
+      const column = parseInt(tile.dataset.column);
+      b.setStone(counter % 2, row, column);
       const checker = new Checker(boardSize);
-      if (checker.isRemoval(b.stones, counter % 2, parseInt(tile.dataset.row), parseInt(tile.dataset.column))) {
-        delete tile.dataset.color;
+      if (checker.isRemoval(b.stones, counter % 2, row, column)) {
         return;
       }
+
+      tile.dataset.color = color();
 
       kifu.push({ row: tile.dataset.row, column: tile.dataset.column, color: tile.dataset.color });
 
