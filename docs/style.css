@@ -16,7 +16,7 @@ table.board tr > td {
 }
 
 table.board tr > td:hover {
-  background-color: magenta;
+  background-color: green;
   opacity: .15;
 }
 
@@ -24,8 +24,16 @@ table.board tr > td[data-color="BLACK"] {
   background-color: darkkhaki;
 }
 
+table.board tr > td[data-color="BLACK"]:hover {
+  background-color: magenta;
+}
+
 table.board tr > td[data-color="WHITE"] {
   background-color: beige;
+}
+
+table.board tr > td[data-color="WHITE"]:hover {
+  background-color: magenta;
 }
 
 table.board {
@@ -40,16 +48,24 @@ table.board {
     width: 80px;
 
     &:hover {
-      background-color: magenta;
+      background-color: green;
       opacity: .15;
     }
 
     &[data-color="BLACK"] {
       background-color: darkkhaki;
+
+      &:hover {
+        background-color: magenta;
+      }
     }
 
     &[data-color="WHITE"] {
       background-color: beige;
+
+      &:hover {
+        background-color: magenta;
+      }
     }
   }
 }
