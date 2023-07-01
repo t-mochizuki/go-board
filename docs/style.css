@@ -1,5 +1,11 @@
+h1 {
+  text-align: center;
+}
+
 table.board {
   background-color: palegoldenrod;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 table.board tr > td {
@@ -24,6 +30,8 @@ table.board tr > td[data-color="WHITE"] {
 
 table.board {
   background-color: palegoldenrod;
+  margin-left: auto;
+  margin-right: auto;
 
   & tr > td {
     background-color: palegoldenrod;
