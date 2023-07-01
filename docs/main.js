@@ -78,8 +78,7 @@
 
     const kifu = [];
 
-    const board = document.querySelector("table.board");
-    board.addEventListener("click", () => {
+    document.querySelector("table.board").addEventListener("click", () => {
       const tile = document.querySelector("table.board tr > td:hover");
 
       if (tile === null) return;
@@ -90,19 +89,19 @@
       const column = parseInt(tile.dataset.column);
 
       [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
-        const b = new Board(boardSize);
-        b.reset();
-        b.setStone(counter % 2, row, column);
+        const board = new Board(boardSize);
+        board.reset();
+        board.setStone(counter % 2, row, column);
 
-        isRemoval(b.stones, counter % 2, row + dy, column + dx);
+        isRemoval(board.stones, counter % 2, row + dy, column + dx);
       });
 
-      const b = new Board(boardSize);
-      b.reset();
-      b.setStone(counter % 2, row, column);
+      const board = new Board(boardSize);
+      board.reset();
+      board.setStone(counter % 2, row, column);
 
       const checker = new Checker(boardSize);
-      if (checker.isRemoval(b.stones, counter % 2, row, column)) {
+      if (checker.isRemoval(board.stones, counter % 2, row, column)) {
         return;
       }
 
