@@ -75,7 +75,6 @@
       b.setStones();
       const checker = new Checker(boardSize);
       if (checker.isRemoval(b.stones, counter % 2, parseInt(tile.dataset.row), parseInt(tile.dataset.column))) {
-        console.table(b.stones);
         delete tile.dataset.color;
         return;
       }
