@@ -4,6 +4,8 @@ class Checker {
     this.path = [];
     this.visited = [];
     for (let i = 0; i < this.boardSize; ++i) this.visited.push(Array(this.boardSize).fill(false));
+    this.stones = [];
+    for (let i = 0; i < this.boardSize; ++i) this.stones.push(Array(this.boardSize).fill(-1));
   }
 
   isRemoval(stones, color, row, column) {
@@ -26,6 +28,19 @@ class Checker {
         delete tile.dataset.color;
       }
       stones[row][column] = -1;
+    }
+  }
+
+  prepare() {
+    for (let row = 0; row < this.boardSize; ++row) {
+      for (let column = 0; column < this.boardSize; ++column) {
+        const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
+
+        if (tile.dataset.color === undefined) continue;
+
+        if (tile.dataset.color === "BLACK") this.stones[row][column] = 0;
+        if (tile.dataset.color === "WHITE") this.stones[row][column] = 1;
+      }
     }
   }
 }
