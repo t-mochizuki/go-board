@@ -59,6 +59,19 @@
   window.addEventListener("load", () => {
     const boardSize = 5;
 
+    const isRemoval = (stones, color, row, column) => {
+      if (row < 0 || boardSize <= row) return;
+      if (column < 0 || boardSize <= column) return;
+
+      if (-1 === stones[row][column]) return;
+      if (color === stones[row][column]) return;
+
+      const checker = new Checker(boardSize);
+      if (checker.isRemoval(stones, stones[row][column], row, column)) {
+        checker.remove(stones);
+      }
+    }
+
     let counter = 1;
     const color = () => counter % 2 === 1 ? "WHITE" : "BLACK";
     const inc = () => counter++;
@@ -73,11 +86,21 @@
 
       if (tile.dataset.color !== undefined) return;
 
-      const b = new Board(boardSize);
-      b.reset();
       const row = parseInt(tile.dataset.row);
       const column = parseInt(tile.dataset.column);
+
+      [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
+        const b = new Board(boardSize);
+        b.reset();
+        b.setStone(counter % 2, row, column);
+
+        isRemoval(b.stones, counter % 2, row + dy, column + dx);
+      });
+
+      const b = new Board(boardSize);
+      b.reset();
       b.setStone(counter % 2, row, column);
+
       const checker = new Checker(boardSize);
       if (checker.isRemoval(b.stones, counter % 2, row, column)) {
         return;
