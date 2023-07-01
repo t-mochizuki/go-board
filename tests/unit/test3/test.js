@@ -40,5 +40,8 @@
     console.assert(checker.isRemoval(stones, stones[0][0], 0, 0) === false, "The white stone shouldn't be removed.");
     console.table(checker.visited);
     console.debug(checker.path);
+    console.table(stones);
+    checker.remove(stones);
+    console.table(stones);
   }
 }
