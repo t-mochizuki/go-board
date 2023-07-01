@@ -18,4 +18,11 @@ class Checker {
 
     return [[-1, 0], [0, 1], [1, 0], [-1, 0]].map(([dy, dx]) => this.isRemoval(stones, color, row + dy, column + dx)).every(x => x);
   }
+
+  remove() {
+    for (const { row, column } of this.path) {
+      const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
+      delete tile.dataset.color;
+    }
+  }
 }
