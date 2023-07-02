@@ -109,7 +109,7 @@
     // const params = new URL(document.location).searchParams;
     // const boardSize = parseInt(params.get("board")) || 5;
 
-    const boardSize = 5;
+    const boardSize = 9;
 
     if (document.querySelector("table.board") === null) {
       const preparer = new BoardPreparer(boardSize);
