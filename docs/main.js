@@ -23,7 +23,7 @@
       this.stones[row][column] = color;
     }
 
-    isRemoval(color, row, column) {
+    remove(color, row, column) {
       if (row < 0 || this.boardSize <= row) return;
       if (column < 0 || this.boardSize <= column) return;
 
@@ -90,7 +90,7 @@
         const board = new Board(boardSize);
         board.reset();
         board.setStone(counter % 2, row, column);
-        board.isRemoval(counter % 2, row + dy, column + dx);
+        board.remove(counter % 2, row + dy, column + dx);
       });
 
       const board = new Board(boardSize);
