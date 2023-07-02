@@ -81,6 +81,9 @@
     const kifu = [];
 
     const turn = document.querySelector("p.turn");
+    if (turn !== null) {
+      turn.textContent = counter === 1 ? "White's turn" : "Black's turn";
+    }
 
     document.querySelector("table.board").addEventListener("click", () => {
       const tile = document.querySelector("table.board tr > td:hover");
