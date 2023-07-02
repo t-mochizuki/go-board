@@ -22,6 +22,19 @@
     setStone(color, row, column) {
       this.stones[row][column] = color;
     }
+
+    isRemoval(color, row, column) {
+      if (row < 0 || this.boardSize <= row) return;
+      if (column < 0 || this.boardSize <= column) return;
+
+      if (-1 === this.stones[row][column]) return;
+      if (color === this.stones[row][column]) return;
+
+      const checker = new Checker(this.boardSize);
+      if (checker.isRemoval(this.stones, this.stones[row][column], row, column)) {
+        checker.remove(this.stones);
+      }
+    }
   }
 
   class Checker {
@@ -59,19 +72,6 @@
   window.addEventListener("load", () => {
     const boardSize = 5;
 
-    const isRemoval = (stones, color, row, column) => {
-      if (row < 0 || boardSize <= row) return;
-      if (column < 0 || boardSize <= column) return;
-
-      if (-1 === stones[row][column]) return;
-      if (color === stones[row][column]) return;
-
-      const checker = new Checker(boardSize);
-      if (checker.isRemoval(stones, stones[row][column], row, column)) {
-        checker.remove(stones);
-      }
-    }
-
     let counter = 0;
     const color = () => counter % 2 === 1 ? "WHITE" : "BLACK";
     const inc = () => counter++;
@@ -92,8 +92,7 @@
         const board = new Board(boardSize);
         board.reset();
         board.setStone(counter % 2, row, column);
-
-        isRemoval(board.stones, counter % 2, row + dy, column + dx);
+        board.isRemoval(counter % 2, row + dy, column + dx);
       });
 
       const board = new Board(boardSize);
