@@ -52,7 +52,7 @@
       if (color !== stones[row][column]) return true;
 
       if (this.visited[row][column]) return true;
-      this.path.push({ row: row, column: column });
+      this.path.push({ row, column });
       this.visited[row][column] = true;
 
       return [[-1, 0], [0, 1], [1, 0], [0, -1]].map(([dy, dx]) => this.isRemoval(stones, color, row + dy, column + dx)).every(x => x);
@@ -73,8 +73,6 @@
     const boardSize = 5;
 
     let counter = 0;
-    const color = () => counter % 2 === 1 ? "WHITE" : "BLACK";
-    const inc = () => counter++;
 
     const kifu = [];
 
@@ -104,11 +102,12 @@
         return;
       }
 
-      tile.dataset.color = color();
+      const color = counter === 1 ? "WHITE" : "BLACK";
+      tile.dataset.color = color;
 
-      kifu.push({ row: tile.dataset.row, column: tile.dataset.column, color: tile.dataset.color });
+      kifu.push({ row, column, color });
 
-      inc();
+      counter = counter === 0 ? 1 : 0;
     });
   });
 })();
