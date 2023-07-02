@@ -76,6 +76,8 @@
 
     const kifu = [];
 
+    const turn = document.querySelector("p.turn");
+
     document.querySelector("table.board").addEventListener("click", () => {
       const tile = document.querySelector("table.board tr > td:hover");
 
@@ -108,6 +110,9 @@
       kifu.push({ row, column, color });
 
       counter = counter === 0 ? 1 : 0;
+      if (turn !== null) {
+        turn.textContent = counter === 1 ? "White's turn" : "Black's turn";
+      }
     });
   });
 })();
