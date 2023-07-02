@@ -70,6 +70,10 @@
   }
 
   window.addEventListener("load", () => {
+    // TODO:
+    // const params = new URL(document.location).searchParams;
+    // const boardSize = parseInt(params.get("board")) || 5;
+
     const boardSize = 5;
 
     let counter = 0;
