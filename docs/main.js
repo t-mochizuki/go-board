@@ -117,13 +117,13 @@
     // const params = new URL(document.location).searchParams;
     // const boardSize = parseInt(params.get("board")) || 5;
 
-    let counter = 0;
+    let stone = 0;
 
     const kifu = [];
 
     const turn = document.querySelector("p.turn");
     if (turn !== null) {
-      turn.textContent = counter === 1 ? "White's turn" : "Black's turn";
+      turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
     }
 
     document.querySelector("table.board").addEventListener("click", () => {
@@ -139,27 +139,27 @@
       [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
         const board = new Board(boardSize);
         board.reset();
-        board.setStone(counter, row, column);
-        board.remove(counter, row + dy, column + dx);
+        board.setStone(stone, row, column);
+        board.remove(stone, row + dy, column + dx);
       });
 
       const board = new Board(boardSize);
       board.reset();
-      board.setStone(counter, row, column);
+      board.setStone(stone, row, column);
 
       const checker = new Checker(boardSize);
-      if (checker.isRemoval(board.stones, counter, row, column)) {
+      if (checker.isRemoval(board.stones, stone, row, column)) {
         return;
       }
 
-      const color = counter === 1 ? "WHITE" : "BLACK";
+      const color = stone === 1 ? "WHITE" : "BLACK";
       tile.dataset.color = color;
 
       kifu.push({ row, column, color });
 
-      counter = counter === 0 ? 1 : 0;
+      stone = stone === 0 ? 1 : 0;
       if (turn !== null) {
-        turn.textContent = counter === 1 ? "White's turn" : "Black's turn";
+        turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
       }
     });
   });
