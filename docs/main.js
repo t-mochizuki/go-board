@@ -139,16 +139,16 @@
       [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
         const board = new Board(boardSize);
         board.reset();
-        board.setStone(counter % 2, row, column);
-        board.remove(counter % 2, row + dy, column + dx);
+        board.setStone(counter, row, column);
+        board.remove(counter, row + dy, column + dx);
       });
 
       const board = new Board(boardSize);
       board.reset();
-      board.setStone(counter % 2, row, column);
+      board.setStone(counter, row, column);
 
       const checker = new Checker(boardSize);
-      if (checker.isRemoval(board.stones, counter % 2, row, column)) {
+      if (checker.isRemoval(board.stones, counter, row, column)) {
         return;
       }
 
