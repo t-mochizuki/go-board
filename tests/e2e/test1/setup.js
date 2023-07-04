@@ -4,7 +4,7 @@
     const column = dx + 2;
     const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
     if (tile !== null) {
-      tile.dataset.color = "BLACK";
+      tile.dataset.color = "WHITE";
     }
   });
 })();
