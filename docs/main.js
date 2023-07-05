@@ -73,43 +73,11 @@
     constructor() {
       super();
 
-      let shadow = this.attachShadow({mode: 'open'});
+      let shadow = this.attachShadow({mode: "open"});
 
-      let style = document.createElement('style');
-      style.textContent = `
-      table.board {
-        background-color: palegoldenrod;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      table.board tr > td {
-        background-color: palegoldenrod;
-        border-radius: 50%;
-        height: 80px;
-        width: 80px;
-      }
-
-      table.board tr > td:hover {
-        background-color: green;
-        opacity: .15;
-      }
-
-      table.board tr > td[data-color="BLACK"] {
-        background-color: darkkhaki;
-      }
-
-      table.board tr > td[data-color="BLACK"]:hover {
-        background-color: magenta;
-      }
-
-      table.board tr > td[data-color="WHITE"] {
-        background-color: beige;
-      }
-
-      table.board tr > td[data-color="WHITE"]:hover {
-        background-color: magenta;
-      }`;
+      const linkElem = document.createElement("link");
+      linkElem.setAttribute("href", "style.css");
+      linkElem.setAttribute("rel", "stylesheet");
 
       const boardSize = 9;
 
@@ -192,7 +160,7 @@
         }
       });
 
-      shadow.appendChild(style);
+      shadow.appendChild(linkElem);
       shadow.appendChild(table);
     }
   }
