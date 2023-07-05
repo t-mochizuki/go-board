@@ -88,38 +88,8 @@
 
       const boardSize = 9;
 
-      const rows = [];
-
-      const trFragment = new DocumentFragment();
-      for (let row = 0; row < boardSize; ++row) {
-        const tr = document.createElement("tr");
-        tr.dataset.row = row;
-
-        const columns = [];
-
-        const tdFragment = new DocumentFragment();
-        for (let column = 0; column < boardSize; ++column) {
-          const td = document.createElement("td");
-          td.dataset.row = row;
-          td.dataset.column = column;
-
-          tdFragment.append(td);
-
-          columns.push(td);
-        }
-
-        tr.append(tdFragment);
-        trFragment.append(tr);
-
-        rows.push(columns);
-      }
-
-      const tbody = document.createElement("tbody");
-      tbody.append(trFragment);
-
-      const table = document.createElement("table");
-      table.className = "board";
-      table.append(tbody);
+      const tableCreator = new TableCreator(boardSize);
+      const { table, rows } = tableCreator.run();
 
       let stone = 0;
 
@@ -170,6 +140,49 @@
       const linkCreator = new LinkCreator();
       shadow.appendChild(linkCreator.run());
       shadow.appendChild(table);
+    }
+  }
+
+  class TableCreator {
+    constructor(boardSize) {
+      this.boardSize = boardSize;
+    }
+
+    run() {
+      const rows = [];
+
+      const trFragment = new DocumentFragment();
+      for (let row = 0; row < this.boardSize; ++row) {
+        const tr = document.createElement("tr");
+        tr.dataset.row = row;
+
+        const columns = [];
+
+        const tdFragment = new DocumentFragment();
+        for (let column = 0; column < this.boardSize; ++column) {
+          const td = document.createElement("td");
+          td.dataset.row = row;
+          td.dataset.column = column;
+
+          tdFragment.append(td);
+
+          columns.push(td);
+        }
+
+        tr.append(tdFragment);
+        trFragment.append(tr);
+
+        rows.push(columns);
+      }
+
+      const tbody = document.createElement("tbody");
+      tbody.append(trFragment);
+
+      const table = document.createElement("table");
+      table.className = "board";
+      table.append(tbody);
+
+      return { table, rows };
     }
   }
 
