@@ -104,6 +104,43 @@
     }
   }
 
+  class GoBoard extends HTMLElement {
+    constructor() {
+      super();
+
+      this.boardSize = 9;
+
+      const trFragment = new DocumentFragment();
+      for (let row = 0; row < this.boardSize; ++row) {
+        const tr = document.createElement("tr");
+        tr.dataset.row = row;
+
+        const tdFragment = new DocumentFragment();
+        for (let column = 0; column < this.boardSize; ++column) {
+          const td = document.createElement("td");
+          td.dataset.row = row;
+          td.dataset.column = column;
+
+          tdFragment.append(td);
+        }
+
+        tr.append(tdFragment);
+        trFragment.append(tr);
+      }
+
+      const tbody = document.createElement("tbody");
+      tbody.append(trFragment);
+
+      const table = document.createElement("table");
+      table.className = "board";
+      table.append(tbody);
+
+      this.append(table);
+    }
+  }
+
+  customElements.define("go-board", GoBoard);
+
   const boardSize = 9;
   const preparer = new BoardPreparer(boardSize);
   preparer.run();
