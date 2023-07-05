@@ -69,15 +69,22 @@
     }
   }
 
+  class LinkCreator {
+    constructor() {}
+
+    run() {
+      const linkElem = document.createElement("link");
+      linkElem.setAttribute("href", "style.css");
+      linkElem.setAttribute("rel", "stylesheet");
+      return linkElem;
+    }
+  }
+
   class GoBoard extends HTMLElement {
     constructor() {
       super();
 
       let shadow = this.attachShadow({mode: "open"});
-
-      const linkElem = document.createElement("link");
-      linkElem.setAttribute("href", "style.css");
-      linkElem.setAttribute("rel", "stylesheet");
 
       const boardSize = 9;
 
@@ -160,7 +167,8 @@
         }
       });
 
-      shadow.appendChild(linkElem);
+      const linkCreator = new LinkCreator();
+      shadow.appendChild(linkCreator.run());
       shadow.appendChild(table);
     }
   }
