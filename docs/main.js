@@ -156,7 +156,7 @@
       }
 
       table.addEventListener("click", () => {
-        const tile = shadow.querySelector("table.board tr > td:hover");
+        const tile = table.querySelector("tr > td:hover");
 
         if (tile === null) return;
 
