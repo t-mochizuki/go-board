@@ -6,10 +6,10 @@
       for (let i = 0; i < this.boardSize; ++i) this.stones.push(Array(this.boardSize).fill(-1));
     }
 
-    reset() {
+    reset(goBoard) {
       for (let row = 0; row < this.boardSize; ++row) {
         for (let column = 0; column < this.boardSize; ++column) {
-          const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
+          const tile = goBoard.querySelector(`tr[data-row="${row}"] > td[data-column="${column}"]`);
 
           if (tile.dataset.color === undefined) continue;
 
@@ -23,7 +23,7 @@
       this.stones[row][column] = stone;
     }
 
-    remove(stone, row, column) {
+    remove(goBoard, stone, row, column) {
       if (row < 0 || this.boardSize <= row) return;
       if (column < 0 || this.boardSize <= column) return;
 
@@ -32,7 +32,7 @@
 
       const checker = new Checker(this.boardSize);
       if (checker.isRemoval(this.stones, this.stones[row][column], row, column)) {
-        checker.remove(this.stones);
+        checker.remove(goBoard, this.stones);
       }
     }
   }
@@ -58,9 +58,9 @@
       return [[-1, 0], [0, 1], [1, 0], [0, -1]].map(([dy, dx]) => this.isRemoval(stones, stone, row + dy, column + dx)).every(x => x);
     }
 
-    remove(stones) {
+    remove(goBoard, stones) {
       for (const { row, column } of this.path) {
-        const tile = document.querySelector(`table.board tr[data-row="${row}"] > td[data-column="${column}"]`);
+        const tile = goBoard.querySelector(`tr[data-row="${row}"] > td[data-column="${column}"]`);
         if (tile !== null) {
           delete tile.dataset.color;
         }
@@ -72,6 +72,44 @@
   class GoBoard extends HTMLElement {
     constructor() {
       super();
+
+      let shadow = this.attachShadow({mode: 'open'});
+
+      let style = document.createElement('style');
+      style.textContent = `
+      table.board {
+        background-color: palegoldenrod;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      table.board tr > td {
+        background-color: palegoldenrod;
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+      }
+
+      table.board tr > td:hover {
+        background-color: green;
+        opacity: .15;
+      }
+
+      table.board tr > td[data-color="BLACK"] {
+        background-color: darkkhaki;
+      }
+
+      table.board tr > td[data-color="BLACK"]:hover {
+        background-color: magenta;
+      }
+
+      table.board tr > td[data-color="WHITE"] {
+        background-color: beige;
+      }
+
+      table.board tr > td[data-color="WHITE"]:hover {
+        background-color: magenta;
+      }`;
 
       const boardSize = 9;
 
@@ -110,7 +148,7 @@
       }
 
       table.addEventListener("click", () => {
-        const tile = document.querySelector("table.board tr > td:hover");
+        const tile = shadow.querySelector("table.board tr > td:hover");
 
         if (tile === null) return;
 
@@ -121,13 +159,13 @@
 
         [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
           const board = new Board(boardSize);
-          board.reset();
+          board.reset(table);
           board.setStone(stone, row, column);
-          board.remove(stone, row + dy, column + dx);
+          board.remove(table, stone, row + dy, column + dx);
         });
 
         const board = new Board(boardSize);
-        board.reset();
+        board.reset(table);
         board.setStone(stone, row, column);
 
         const checker = new Checker(boardSize);
@@ -146,7 +184,8 @@
         }
       });
 
-      this.append(table);
+      shadow.appendChild(style);
+      shadow.appendChild(table);
     }
   }
 
