@@ -130,7 +130,7 @@
       this.kifu = [];
     }
 
-    run(table, rows, turn) {
+    run(table, goBoard, turn) {
       const tile = table.querySelector("tr > td:hover");
 
       if (tile === null) return;
@@ -142,13 +142,13 @@
 
       [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
         const board = new Board(this.boardSize);
-        board.reset(rows);
+        board.reset(goBoard);
         board.setStone(this.stone, row, column);
-        board.remove(rows, this.stone, row + dy, column + dx);
+        board.remove(goBoard, this.stone, row + dy, column + dx);
       });
 
       const board = new Board(this.boardSize);
-      board.reset(rows);
+      board.reset(goBoard);
       board.setStone(this.stone, row, column);
 
       const checker = new Checker(this.boardSize);
@@ -181,9 +181,9 @@
 
       const boardSize = 9;
       const tableCreator = new TableCreator(boardSize);
-      const { table, rows } = tableCreator.run();
+      const { table, rows: goBoard } = tableCreator.run();
       const goRule = new GoRule(boardSize);
-      table.addEventListener("click", () => goRule.run(table, rows, turn));
+      table.addEventListener("click", () => goRule.run(table, goBoard, turn));
 
       const linkCreator = new LinkCreator();
       shadow.appendChild(linkCreator.run());
