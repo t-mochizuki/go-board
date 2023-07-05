@@ -86,56 +86,16 @@
 
       let shadow = this.attachShadow({mode: "open"});
 
-      const boardSize = 9;
-
-      const tableCreator = new TableCreator(boardSize);
-      const { table, rows } = tableCreator.run();
-
-      let stone = 0;
-
-      const kifu = [];
-
       const turn = document.querySelector("p.turn");
       if (turn !== null) {
-        turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
+        turn.textContent = "Black's turn";
       }
 
-      table.addEventListener("click", () => {
-        const tile = table.querySelector("tr > td:hover");
-
-        if (tile === null) return;
-
-        if (tile.dataset.color !== undefined) return;
-
-        const row = parseInt(tile.dataset.row);
-        const column = parseInt(tile.dataset.column);
-
-        [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
-          const board = new Board(boardSize);
-          board.reset(rows);
-          board.setStone(stone, row, column);
-          board.remove(rows, stone, row + dy, column + dx);
-        });
-
-        const board = new Board(boardSize);
-        board.reset(rows);
-        board.setStone(stone, row, column);
-
-        const checker = new Checker(boardSize);
-        if (checker.isRemoval(board.stones, stone, row, column)) {
-          return;
-        }
-
-        const color = stone === 1 ? "WHITE" : "BLACK";
-        tile.dataset.color = color;
-
-        kifu.push({ row, column, color });
-
-        stone = stone === 0 ? 1 : 0;
-        if (turn !== null) {
-          turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
-        }
-      });
+      const boardSize = 9;
+      const tableCreator = new TableCreator(boardSize);
+      const { table, rows } = tableCreator.run();
+      const goRule = new GoRule(boardSize);
+      table.addEventListener("click", () => goRule.run(table, rows, turn));
 
       const linkCreator = new LinkCreator();
       shadow.appendChild(linkCreator.run());
@@ -183,6 +143,51 @@
       table.append(tbody);
 
       return { table, rows };
+    }
+  }
+
+  class GoRule {
+    constructor(boardSize) {
+      this.boardSize = boardSize;
+      this.stone = 0;
+      this.kifu = [];
+    }
+
+    run(table, rows, turn) {
+      const tile = table.querySelector("tr > td:hover");
+
+      if (tile === null) return;
+
+      if (tile.dataset.color !== undefined) return;
+
+      const row = parseInt(tile.dataset.row);
+      const column = parseInt(tile.dataset.column);
+
+      [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
+        const board = new Board(this.boardSize);
+        board.reset(rows);
+        board.setStone(this.stone, row, column);
+        board.remove(rows, this.stone, row + dy, column + dx);
+      });
+
+      const board = new Board(this.boardSize);
+      board.reset(rows);
+      board.setStone(this.stone, row, column);
+
+      const checker = new Checker(this.boardSize);
+      if (checker.isRemoval(board.stones, this.stone, row, column)) {
+        return;
+      }
+
+      const color = this.stone === 1 ? "WHITE" : "BLACK";
+      tile.dataset.color = color;
+
+      this.kifu.push({ row, column, color });
+
+      this.stone = this.stone === 0 ? 1 : 0;
+      if (turn !== null) {
+        turn.textContent = this.stone === 1 ? "White's turn" : "Black's turn";
+      }
     }
   }
 
