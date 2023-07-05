@@ -19,16 +19,16 @@
       }
     }
 
-    setStone(color, row, column) {
-      this.stones[row][column] = color;
+    setStone(stone, row, column) {
+      this.stones[row][column] = stone;
     }
 
-    remove(color, row, column) {
+    remove(stone, row, column) {
       if (row < 0 || this.boardSize <= row) return;
       if (column < 0 || this.boardSize <= column) return;
 
       if (-1 === this.stones[row][column]) return;
-      if (color === this.stones[row][column]) return;
+      if (stone === this.stones[row][column]) return;
 
       const checker = new Checker(this.boardSize);
       if (checker.isRemoval(this.stones, this.stones[row][column], row, column)) {
@@ -45,17 +45,17 @@
       for (let i = 0; i < this.boardSize; ++i) this.visited.push(Array(this.boardSize).fill(false));
     }
 
-    isRemoval(stones, color, row, column) {
+    isRemoval(stones, stone, row, column) {
       if (row < 0 || this.boardSize <= row) return true;
       if (column < 0 || this.boardSize <= column) return true;
       if (-1 === stones[row][column]) return false;
-      if (color !== stones[row][column]) return true;
+      if (stone !== stones[row][column]) return true;
 
       if (this.visited[row][column]) return true;
       this.path.push({ row, column });
       this.visited[row][column] = true;
 
-      return [[-1, 0], [0, 1], [1, 0], [0, -1]].map(([dy, dx]) => this.isRemoval(stones, color, row + dy, column + dx)).every(x => x);
+      return [[-1, 0], [0, 1], [1, 0], [0, -1]].map(([dy, dx]) => this.isRemoval(stones, stone, row + dy, column + dx)).every(x => x);
     }
 
     remove(stones) {
