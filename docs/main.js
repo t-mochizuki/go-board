@@ -9,7 +9,7 @@
     reset(goBoard) {
       for (let row = 0; row < this.boardSize; ++row) {
         for (let column = 0; column < this.boardSize; ++column) {
-          const tile = goBoard.querySelector(`tr[data-row="${row}"] > td[data-column="${column}"]`);
+          const tile = goBoard[row][column];
 
           if (tile.dataset.color === undefined) continue;
 
@@ -60,7 +60,7 @@
 
     remove(goBoard, stones) {
       for (const { row, column } of this.path) {
-        const tile = goBoard.querySelector(`tr[data-row="${row}"] > td[data-column="${column}"]`);
+        const tile = goBoard[row][column];
         if (tile !== null) {
           delete tile.dataset.color;
         }
@@ -113,10 +113,14 @@
 
       const boardSize = 9;
 
+      const rows = [];
+
       const trFragment = new DocumentFragment();
       for (let row = 0; row < boardSize; ++row) {
         const tr = document.createElement("tr");
         tr.dataset.row = row;
+
+        const columns = [];
 
         const tdFragment = new DocumentFragment();
         for (let column = 0; column < boardSize; ++column) {
@@ -125,10 +129,14 @@
           td.dataset.column = column;
 
           tdFragment.append(td);
+
+          columns.push(td);
         }
 
         tr.append(tdFragment);
         trFragment.append(tr);
+
+        rows.push(columns);
       }
 
       const tbody = document.createElement("tbody");
@@ -159,13 +167,13 @@
 
         [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
           const board = new Board(boardSize);
-          board.reset(table);
+          board.reset(rows);
           board.setStone(stone, row, column);
-          board.remove(table, stone, row + dy, column + dx);
+          board.remove(rows, stone, row + dy, column + dx);
         });
 
         const board = new Board(boardSize);
-        board.reset(table);
+        board.reset(rows);
         board.setStone(stone, row, column);
 
         const checker = new Checker(boardSize);
