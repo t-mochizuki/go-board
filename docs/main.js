@@ -69,54 +69,19 @@
     }
   }
 
-  class BoardPreparer {
-    constructor(boardSize) {
-      this.boardSize = boardSize;
-    }
-
-    run() {
-      const trFragment = new DocumentFragment();
-      for (let row = 0; row < this.boardSize; ++row) {
-        const tr = document.createElement("tr");
-        tr.dataset.row = row;
-
-        const tdFragment = new DocumentFragment();
-        for (let column = 0; column < this.boardSize; ++column) {
-          const td = document.createElement("td");
-          td.dataset.row = row;
-          td.dataset.column = column;
-
-          tdFragment.append(td);
-        }
-
-        tr.append(tdFragment);
-        trFragment.append(tr);
-      }
-
-      const tbody = document.createElement("tbody");
-      tbody.append(trFragment);
-
-      const table = document.createElement("table");
-      table.className = "board";
-      table.append(tbody);
-
-      document.querySelector("body").append(table);
-    }
-  }
-
   class GoBoard extends HTMLElement {
     constructor() {
       super();
 
-      this.boardSize = 9;
+      const boardSize = 9;
 
       const trFragment = new DocumentFragment();
-      for (let row = 0; row < this.boardSize; ++row) {
+      for (let row = 0; row < boardSize; ++row) {
         const tr = document.createElement("tr");
         tr.dataset.row = row;
 
         const tdFragment = new DocumentFragment();
-        for (let column = 0; column < this.boardSize; ++column) {
+        for (let column = 0; column < boardSize; ++column) {
           const td = document.createElement("td");
           td.dataset.row = row;
           td.dataset.column = column;
@@ -134,66 +99,56 @@
       const table = document.createElement("table");
       table.className = "board";
       table.append(tbody);
+
+      let stone = 0;
+
+      const kifu = [];
+
+      const turn = document.querySelector("p.turn");
+      if (turn !== null) {
+        turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
+      }
+
+      table.addEventListener("click", () => {
+        const tile = document.querySelector("table.board tr > td:hover");
+
+        if (tile === null) return;
+
+        if (tile.dataset.color !== undefined) return;
+
+        const row = parseInt(tile.dataset.row);
+        const column = parseInt(tile.dataset.column);
+
+        [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
+          const board = new Board(boardSize);
+          board.reset();
+          board.setStone(stone, row, column);
+          board.remove(stone, row + dy, column + dx);
+        });
+
+        const board = new Board(boardSize);
+        board.reset();
+        board.setStone(stone, row, column);
+
+        const checker = new Checker(boardSize);
+        if (checker.isRemoval(board.stones, stone, row, column)) {
+          return;
+        }
+
+        const color = stone === 1 ? "WHITE" : "BLACK";
+        tile.dataset.color = color;
+
+        kifu.push({ row, column, color });
+
+        stone = stone === 0 ? 1 : 0;
+        if (turn !== null) {
+          turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
+        }
+      });
 
       this.append(table);
     }
   }
 
   customElements.define("go-board", GoBoard);
-
-  const boardSize = 9;
-  const preparer = new BoardPreparer(boardSize);
-  preparer.run();
-
-  window.addEventListener("load", () => {
-    // TODO:
-    // const params = new URL(document.location).searchParams;
-    // const boardSize = parseInt(params.get("board")) || 5;
-
-    let stone = 0;
-
-    const kifu = [];
-
-    const turn = document.querySelector("p.turn");
-    if (turn !== null) {
-      turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
-    }
-
-    document.querySelector("table.board").addEventListener("click", () => {
-      const tile = document.querySelector("table.board tr > td:hover");
-
-      if (tile === null) return;
-
-      if (tile.dataset.color !== undefined) return;
-
-      const row = parseInt(tile.dataset.row);
-      const column = parseInt(tile.dataset.column);
-
-      [[-1, 0], [0, 1], [1, 0], [0, -1]].forEach(([dy, dx]) => {
-        const board = new Board(boardSize);
-        board.reset();
-        board.setStone(stone, row, column);
-        board.remove(stone, row + dy, column + dx);
-      });
-
-      const board = new Board(boardSize);
-      board.reset();
-      board.setStone(stone, row, column);
-
-      const checker = new Checker(boardSize);
-      if (checker.isRemoval(board.stones, stone, row, column)) {
-        return;
-      }
-
-      const color = stone === 1 ? "WHITE" : "BLACK";
-      tile.dataset.color = color;
-
-      kifu.push({ row, column, color });
-
-      stone = stone === 0 ? 1 : 0;
-      if (turn !== null) {
-        turn.textContent = stone === 1 ? "White's turn" : "Black's turn";
-      }
-    });
-  });
 })();
