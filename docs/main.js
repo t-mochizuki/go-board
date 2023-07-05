@@ -80,29 +80,6 @@
     }
   }
 
-  class GoBoard extends HTMLElement {
-    constructor() {
-      super();
-
-      let shadow = this.attachShadow({mode: "open"});
-
-      const turn = document.querySelector("p.turn");
-      if (turn !== null) {
-        turn.textContent = "Black's turn";
-      }
-
-      const boardSize = 9;
-      const tableCreator = new TableCreator(boardSize);
-      const { table, rows } = tableCreator.run();
-      const goRule = new GoRule(boardSize);
-      table.addEventListener("click", () => goRule.run(table, rows, turn));
-
-      const linkCreator = new LinkCreator();
-      shadow.appendChild(linkCreator.run());
-      shadow.appendChild(table);
-    }
-  }
-
   class TableCreator {
     constructor(boardSize) {
       this.boardSize = boardSize;
@@ -188,6 +165,29 @@
       if (turn !== null) {
         turn.textContent = this.stone === 1 ? "White's turn" : "Black's turn";
       }
+    }
+  }
+
+  class GoBoard extends HTMLElement {
+    constructor() {
+      super();
+
+      let shadow = this.attachShadow({mode: "open"});
+
+      const turn = document.querySelector("p.turn");
+      if (turn !== null) {
+        turn.textContent = "Black's turn";
+      }
+
+      const boardSize = 9;
+      const tableCreator = new TableCreator(boardSize);
+      const { table, rows } = tableCreator.run();
+      const goRule = new GoRule(boardSize);
+      table.addEventListener("click", () => goRule.run(table, rows, turn));
+
+      const linkCreator = new LinkCreator();
+      shadow.appendChild(linkCreator.run());
+      shadow.appendChild(table);
     }
   }
 
