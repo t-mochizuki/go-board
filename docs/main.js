@@ -76,7 +76,7 @@
       const linkElem = document.createElement("link");
       linkElem.setAttribute("href", "style.css");
       linkElem.setAttribute("rel", "stylesheet");
-      return linkElem;
+      return { linkElem };
     }
   }
 
@@ -172,7 +172,7 @@
     constructor() {
       super();
 
-      let shadow = this.attachShadow({mode: "open"});
+      let shadow = this.attachShadow({ mode: "open" });
 
       const turn = document.querySelector("p.turn");
       if (turn !== null) {
@@ -184,11 +184,11 @@
       const { table, rows: goBoard } = tableCreator.run();
       const goRule = new GoRule(boardSize);
       table.addEventListener("click", () => goRule.run(table, goBoard, turn));
+      shadow.appendChild(table);
 
       const linkCreator = new LinkCreator();
-      const link = linkCreator.run();
-      shadow.appendChild(link);
-      shadow.appendChild(table);
+      const { linkElem } = linkCreator.run();
+      shadow.appendChild(linkElem);
     }
   }
 
