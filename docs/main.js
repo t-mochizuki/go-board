@@ -186,7 +186,8 @@
       table.addEventListener("click", () => goRule.run(table, goBoard, turn));
 
       const linkCreator = new LinkCreator();
-      shadow.appendChild(linkCreator.run());
+      const link = linkCreator.run();
+      shadow.appendChild(link);
       shadow.appendChild(table);
     }
   }
