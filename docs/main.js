@@ -23,17 +23,14 @@
       this.stones[row][column] = stone;
     }
 
-    remove(goBoard, stone, row, column) {
-      if (row < 0 || this.boardSize <= row) return;
-      if (column < 0 || this.boardSize <= column) return;
+    isRemovable(stone, row, column) {
+      if (row < 0 || this.boardSize <= row) return false;
+      if (column < 0 || this.boardSize <= column) return false;
 
-      if (-1 === this.stones[row][column]) return;
-      if (stone === this.stones[row][column]) return;
+      if (-1 === this.stones[row][column]) return false;
+      if (stone === this.stones[row][column]) return false;
 
-      const checker = new Checker(this.boardSize);
-      if (checker.isRemoval(this.stones, this.stones[row][column], row, column)) {
-        checker.remove(goBoard, this.stones);
-      }
+      return true;
     }
   }
 
@@ -144,7 +141,13 @@
         const board = new Board(this.boardSize);
         board.reset(goBoard);
         board.setStone(this.stone, row, column);
-        board.remove(goBoard, this.stone, row + dy, column + dx);
+
+        if (board.isRemovable(this.stone, row + dy, column + dx)) {
+          const checker = new Checker(this.boardSize);
+          if (checker.isRemoval(board.stones, board.stones[row + dy][column + dx], row + dy, column + dx)) {
+            checker.remove(goBoard, board.stones);
+          }
+        }
       });
 
       const board = new Board(this.boardSize);
