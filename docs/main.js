@@ -115,11 +115,11 @@
       const tbody = document.createElement("tbody");
       tbody.append(trFragment);
 
-      const table = document.createElement("table");
-      table.className = "board";
-      table.append(tbody);
+      const tableElem = document.createElement("table");
+      tableElem.className = "board";
+      tableElem.append(tbody);
 
-      return { table, rows };
+      return { tableElem, rows };
     }
   }
 
@@ -181,10 +181,10 @@
 
       const boardSize = 9;
       const tableCreator = new TableCreator(boardSize);
-      const { table, rows: goBoard } = tableCreator.run();
+      const { tableElem, rows: goBoard } = tableCreator.run();
       const goRule = new GoRule(boardSize);
-      table.addEventListener("click", () => goRule.run(table, goBoard, turn));
-      shadow.appendChild(table);
+      tableElem.addEventListener("click", () => goRule.run(tableElem, goBoard, turn));
+      shadow.appendChild(tableElem);
 
       const linkCreator = new LinkCreator();
       const { linkElem } = linkCreator.run();
