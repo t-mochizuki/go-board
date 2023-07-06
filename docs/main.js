@@ -172,7 +172,7 @@
     constructor() {
       super();
 
-      let shadow = this.attachShadow({ mode: "open" });
+      let shadow = this.dataset.test ? this : this.attachShadow({ mode: "open" });
 
       const turn = document.querySelector("p.turn");
       if (turn !== null) {
